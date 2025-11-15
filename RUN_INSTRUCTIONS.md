@@ -7,7 +7,33 @@ The DBS Announcement Project server has been successfully started.
 ### Server Information
 - **Port**: 3000
 - **Main File**: server.js
-- **Status**: Running (PID: 3416)
+- **Status**: Running
+- **Database**: MongoDB Atlas
+
+### MongoDB Connection Setup
+
+Based on your MongoDB Atlas connection string, you need to set up authentication:
+
+1. **Create a `.env` file** in the project root (copy from `.env.example`):
+   ```bash
+   cp .env.example .env
+   ```
+
+2. **Edit `.env` file** and add your MongoDB password:
+   ```
+   MONGO_USERNAME=abdulghanisidz
+   MONGO_PASSWORD=your_actual_password_here
+   ```
+
+3. **Install dotenv package** (if not already installed):
+   ```bash
+   npm install dotenv
+   ```
+
+The connection string format from your MongoDB Atlas:
+```
+mongodb+srv://abdulghanisidz:<password>@mongodbase.grsajl8.mongodb.net/schoolApp
+```
 
 ### How to Run the Program
 
@@ -16,7 +42,9 @@ The DBS Announcement Project server has been successfully started.
    npm install
    ```
 
-2. **Start the Server**:
+2. **Set up environment variables** (see MongoDB Connection Setup above)
+
+3. **Start the Server**:
    ```bash
    npm start
    ```
@@ -28,6 +56,7 @@ The DBS Announcement Project server has been successfully started.
 ### Server Output
 ```
 ✅ Server running on port 3000
+✅ Connected to MongoDB Atlas
 ```
 
 ### Available Endpoints
@@ -57,18 +86,5 @@ curl -X POST http://localhost:3000/announcements \
 
 - The server uses MongoDB Atlas for data storage
 - CORS is configured to allow requests from: https://siteforschool2.wuaze.com
-- The server will attempt to connect to MongoDB on startup
-- If MongoDB connection fails, the server will continue running but database operations may fail
-
-### Current Execution
-
-The program is currently running in the background with the following output:
-
-```
-> dbs-for-announcement-project@1.0.0 start
-> node server.js
-
-✅ Server running on port 3000
-```
-
-The server is actively listening for HTTP requests on port 3000.
+- MongoDB credentials are managed via environment variables for security
+- Make sure your MongoDB Atlas IP whitelist includes your server's IP address

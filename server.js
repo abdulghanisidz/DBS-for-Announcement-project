@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
+require("dotenv").config();
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -15,13 +16,14 @@ app.use(cors({
 }));
 
 // Connect to MongoDB Atlas
-mongoose.connect(
-  "mongodb+srv://abdulghanisidz:ABDULGHANISIDZ@mongodbase.grsajl8.mongodb.net/schoolApp?retryWrites=true&w=majority",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  }
-)
+const mongoUsername = process.env.MONGO_USERNAME || "abdulghanisidz";
+const mongoPassword = process.env.MONGO_PASSWORD || "";
+const mongoCluster = "mongodbase.grsajl8.mongodb.net";
+const mongoDatabase = "schoolApp";
+
+const mongoURI = `mongodb+srv://${mongoUsername}:${mongoPassword}@${mongoCluster}/${mongoDatabase}?retryWrites=true&w=majority`;
+
+mongoose.connect(mongoURI)
 .then(() => console.log("✅ Connected to MongoDB Atlas"))
 .catch(err => console.error("❌ MongoDB connection error:", err));
 
